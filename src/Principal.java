@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Principal {
@@ -25,7 +26,7 @@ public class Principal {
             boolean compraRealizada = cartao.lancaCompra(compra);
 
             if (compraRealizada) {
-
+                System.out.println("Compra realizada!");
             } else {
                 System.out.println("Saldo insuficiente para realizar a compra deste produto");
             }
@@ -34,9 +35,21 @@ public class Principal {
             sair = leitura.nextInt();
 
             if (sair == 0) {
-                System.out.println("\n\nExtrato das suas compras:");
-                System.out.println(compra);
-                System.out.println("\nObrigado pela prefência!");
+                System.out.println("""
+                        
+                        *************************
+                        Extrato das suas compras:
+                        -------------------------""");
+                Collections.sort(cartao.getCompras());
+                for (Compra c: cartao.getCompras()) {
+                    System.out.println(c);
+                }
+                System.out.println("-------------------------");
+                cartao.imprimeSaldo();
+                System.out.println("""
+                        
+                        Obrigado pela prefência!
+                        -------------------------""");
 
             }
         }
